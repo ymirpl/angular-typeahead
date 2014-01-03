@@ -12,10 +12,12 @@ angular.module('siyfion.sfTypeahead', [])
 
         function updateScope (object, datum, dataset) {
           // for some reason $apply will place [Object] into element, this hacks around it
+          // this hack is not working @ymirpl :)
+          // datum['value'] needs to go into the model
           var preserveVal = element.val();
           scope.$apply(function () {
             localChange = true;
-            scope.ngModel = datum;
+            scope.ngModel = datum['value'];
             scope.selectedDataset = dataset;
           });
           element.val(preserveVal);
